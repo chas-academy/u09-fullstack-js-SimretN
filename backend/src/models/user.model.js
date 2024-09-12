@@ -15,11 +15,11 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
-    }
-    /*avatar:{
+    },
+    avatar:{
       type: String,
-      default: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-    },*/
+      default: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=pexels-pixabay-220453.jpg&fm=jpg"
+    },
   },
   { timestamps: true }
 );
