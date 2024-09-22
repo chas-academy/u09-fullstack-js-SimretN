@@ -1,14 +1,14 @@
-
 import { useState } from 'react';
 import {
   getDownloadURL,
-  getStorage,
   ref,
   uploadBytesResumable,
 } from 'firebase/storage';
-import { app } from '../firebase';
+import { getAuth } from 'firebase/auth';
+import { storage } from '../firebase';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import imageCompression from 'browser-image-compression';
 
 export default function CreateListing() {
   const { currentUser } = useSelector((state) => state.user);
@@ -32,29 +32,107 @@ export default function CreateListing() {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+
   console.log(formData);
-  const handleImageSubmit = (e) => {
+
+  const compressImage = async (file) => {
+    const maxSizeMB = 2;
+    const options = {
+      maxSizeMB: maxSizeMB,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true,
+      initialQuality: 0.7,
+    };
+    
+    try {
+      let compressedFile = await imageCompression(file, options);
+      
+      if (compressedFile.size > maxSizeMB * 1024 * 1024) {
+        options.maxSizeMB = maxSizeMB / 2;
+        options.initialQuality = 0.5;
+        compressedFile = await imageCompression(compressedFile, options);
+      }
+      
+      console.log(`Original file size: ${file.size / 1024 / 1024} MB`);
+      console.log(`Compressed file size: ${compressedFile.size / 1024 / 1024} MB`);
+      
+      return compressedFile;
+    } catch (error) {
+      console.error("Error compressing image:", error);
+      return null;
+    }
+  };
+
+  const handleFileSelect = (e) => {
+    const selectedFiles = Array.from(e.target.files);
+    const validFiles = selectedFiles.filter(file => file.size <= 10 * 1024 * 1024);
+    
+    if (validFiles.length < selectedFiles.length) {
+      setImageUploadError('Some files were too large and were not selected. Please choose files smaller than 10MB.');
+    } else {
+      setImageUploadError(null);
+    }
+    
+    setFiles(validFiles);
+  };
+
+  const handleImageSubmit = async (e) => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    if (!user) {
+      setImageUploadError('You must be logged in to upload images.');
+      return;
+    }
+
     if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
       setUploading(true);
       setImageUploadError(false);
       const promises = [];
 
       for (let i = 0; i < files.length; i++) {
-        promises.push(storeImage(files[i]));
+        const file = files[i];
+        console.log(`Processing file: ${file.name}, size: ${file.size / 1024 / 1024} MB`);
+
+        try {
+          const compressedFile = await compressImage(file);
+          if (compressedFile) {
+            if (compressedFile.size <= 2 * 1024 * 1024) {
+              promises.push(storeImage(compressedFile));
+            } else {
+              console.warn(`${file.name} is still too large after compression: ${compressedFile.size / 1024 / 1024} MB`);
+              setImageUploadError(`${file.name} is still too large (${(compressedFile.size / 1024 / 1024).toFixed(2)} MB) after compression. Please try a smaller image.`);
+            }
+          } else {
+            console.error(`Failed to compress ${file.name}`);
+            setImageUploadError(`Failed to compress ${file.name}. Please try a smaller image.`);
+          }
+        } catch (error) {
+          console.error(`Error processing ${file.name}:`, error);
+          setImageUploadError(`Error processing ${file.name}. Please try again.`);
+        }
       }
-      Promise.all(promises)
-        .then((urls) => {
-          setFormData({
-            ...formData,
-            imageUrls: formData.imageUrls.concat(urls),
+
+      if (promises.length > 0) {
+        Promise.all(promises)
+          .then((urls) => {
+            console.log("All images uploaded successfully:", urls);
+            setFormData({
+              ...formData,
+              imageUrls: formData.imageUrls.concat(urls),
+            });
+            setImageUploadError(false);
+            setUploading(false);
+          })
+          .catch((err) => {
+            console.error("Upload error:", err);
+            setImageUploadError('Image upload failed. Please try again.');
+            setUploading(false);
           });
-          setImageUploadError(false);
-          setUploading(false);
-        })
-        .catch((err) => {
-          setImageUploadError('Image upload failed (2 mb max per image)');
-          setUploading(false);
-        });
+      } else {
+        console.warn("No images to upload after processing");
+        setUploading(false);
+      }
     } else {
       setImageUploadError('You can only upload 6 images per listing');
       setUploading(false);
@@ -63,8 +141,14 @@ export default function CreateListing() {
 
   const storeImage = async (file) => {
     return new Promise((resolve, reject) => {
-      const storage = getStorage(app);
-      const fileName = new Date().getTime() + file.name;
+      const auth = getAuth();
+      const user = auth.currentUser;
+      if (!user) {
+        reject(new Error('User not authenticated'));
+        return;
+      }
+
+      const fileName = `${user.uid}/${new Date().getTime()}${file.name}`;
       const storageRef = ref(storage, fileName);
       const uploadTask = uploadBytesResumable(storageRef, file);
       uploadTask.on(
@@ -75,11 +159,16 @@ export default function CreateListing() {
           console.log(`Upload is ${progress}% done`);
         },
         (error) => {
+          console.error("Upload error:", error);
           reject(error);
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            console.log("File available at", downloadURL);
             resolve(downloadURL);
+          }).catch((error) => {
+            console.error("Error getting download URL:", error);
+            reject(error);
           });
         }
       );
@@ -154,6 +243,7 @@ export default function CreateListing() {
       setLoading(false);
     }
   };
+
   return (
     <main className='p-3 max-w-4xl mx-auto'>
       <h1 className='text-3xl font-semibold text-center my-7'>
@@ -301,7 +391,6 @@ export default function CreateListing() {
                 />
                 <div className='flex flex-col items-center'>
                   <p>Discounted price</p>
-
                   {formData.type === 'rent' && (
                     <span className='text-xs'>($ / month)</span>
                   )}
@@ -314,12 +403,12 @@ export default function CreateListing() {
           <p className='font-semibold'>
             Images:
             <span className='font-normal text-gray-600 ml-2'>
-              The first image will be the cover (max 6)
+              The first image will be the cover (max 6). Each image should be less than 2MB after compression.
             </span>
           </p>
           <div className='flex gap-4'>
             <input
-              onChange={(e) => setFiles(e.target.files)}
+              onChange={handleFileSelect}
               className='p-3 border border-gray-300 rounded w-full'
               type='file'
               id='images'
