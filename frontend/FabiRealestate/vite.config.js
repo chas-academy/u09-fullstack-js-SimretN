@@ -7,6 +7,7 @@ export default defineConfig({
     proxy: {
       '/api': {
         target: 'https://u09-fullstack-js-simretn.onrender.com',
+        changeOrigin: true,
         secure: false,
       },
     },
