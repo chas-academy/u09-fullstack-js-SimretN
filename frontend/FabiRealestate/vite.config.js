@@ -8,7 +8,7 @@ export default defineConfig({
       '/api': {
         target: 'https://u09-fullstack-js-simretn.onrender.com',
         changeOrigin: true,
-        secure: false,
+        secure: true,
       },
     },
   },
