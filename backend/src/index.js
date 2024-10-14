@@ -22,7 +22,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors({
-  origin: "https://fabiestate.netlify.app/"
+  origin: "https://fabiestate.netlify.app"
 }))
 
 app.use(express.urlencoded({ extended: true}));
