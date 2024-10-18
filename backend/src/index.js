@@ -21,11 +21,11 @@ mongoose.connect(process.env.MONGO)
 const app = express();
 
 app.use(express.json());
-const whitelist = [
+/*const whitelist = [
   "https://fabiestate.netlify.app",
   "http://localhost:5173"
-]
-app.use(cors({
+]*/
+/*app.use(cors({
   origin: function(origin,callback) {
     if (whitelist.indexOf(origin)!==-1||!origin){
       callback(null,true)
@@ -33,7 +33,11 @@ app.use(cors({
       callback(new Error("not allowed by cors"))
     }
   }
-}))
+}))*/
+app.use(cors({
+  origin: "https://fabiestate.netlify.app",
+  credentials:true
+}));
 
 app.use(express.urlencoded({ extended: true}));
 
