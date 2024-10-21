@@ -25,15 +25,26 @@ const whitelist = [
   "https://fabiestate.netlify.app",
   "http://localhost:5173"
 ]
-app.use(cors({
-  origin: function(origin,callback) {
+//  app.use(cors({
+  /*origin: function(origin,callback) {
     if (whitelist.indexOf(origin)!==-1||!origin){
       callback(null,true)
     }else{
       callback(new Error("not allowed by cors"))
     }
-  }
-}))
+  },*/
+//   origin: "http://localhost:5173",
+//    credentials: true
+// }))
+
+const corsOptions = {
+  origin: "*", 
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true,
+};
+
+// Use CORS middleware
+app.use(cors(corsOptions));
 
 
 app.use(express.urlencoded({ extended: true}));
