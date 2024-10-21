@@ -3,14 +3,29 @@ import { errorHandler } from '../../utils/error.js';
 
 
 
-export const createListing = async (req, res, next) => {
+/*export const createListing = async (req, res, next) => {
     try {
       const listing = await Listing.create(req.body);
       return res.status(201).json(listing);
     } catch (error) {
       next(error);
     }
+  };*/
+  export const createListing = async (req, res, next) => {
+    const { title, price, description, userRef } = req.body; // Example fields
+  
+    if (!title || !price || !description || !userRef) {
+      return next(errorHandler(400, 'All fields are required!'));
+    }
+  
+    try {
+      const listing = await Listing.create(req.body);
+      res.status(201).json(listing);
+    } catch (error) {
+      next(error);
+    }
   };
+  
   export const deleteListing = async (req, res, next) => {
     const listing = await Listing.findById(req.params.id);
   
@@ -51,7 +66,7 @@ export const createListing = async (req, res, next) => {
     }
   };
 
-  export const getListing = async (req, res, next) => {
+  /*export const getListing = async (req, res, next) => {
     try {
       const listing = await Listing.findById(req.params.id);
       if (!listing) {
@@ -61,7 +76,26 @@ export const createListing = async (req, res, next) => {
     } catch (error) {
       next(error);
     }
+  };*/
+
+  export const getListing = async (req, res, next) => {
+    const listingId = req.params.id;
+    
+    if (!listingId) {
+      return next(errorHandler(400, 'Listing ID is required.'));
+    }
+  
+    try {
+      const listing = await Listing.findById(listingId);
+      if (!listing) {
+        return next(errorHandler(404, 'Listing not found!'));
+      }
+      res.status(200).json(listing);
+    } catch (error) {
+      next(error);
+    }
   };
+  
 
   export const getListings = async (req, res, next) => {
     try {
