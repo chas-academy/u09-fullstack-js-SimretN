@@ -61,7 +61,7 @@ app.use('/api/listing', listingRouter);
 //   res.sendFile(path.join(__dirname, 'frontend/FabiRealestate', 'dist', 'index.html'));
 // })
 
-app.use((err, req, res, next) => { //middleware
+/*app.use((err, req, res, next) => { //middleware
   const statusCode = err.statusCode || 500;
   const message = err.message || 'Internal Server Error';
   return res.status(statusCode).json({
@@ -69,7 +69,13 @@ app.use((err, req, res, next) => { //middleware
     statusCode,
     message,
   });
+});*/
+app.use((err, req, res, next) => {
+  const status = err.status || 500;
+  const message = err.message || 'Internal Server Error';
+  res.status(status).json({ status, message });
 });
+
 
 const port = process.env.PORT || 3000; // This should be the only declaration of 'port'
 app.listen(port, () => {

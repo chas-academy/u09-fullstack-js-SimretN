@@ -25,6 +25,7 @@ export default function SignIn() {
       dispatch(signInStart());
       const res = await fetch('https://u09-fullstack-js-simretn.onrender.com/api/auth/signin', {
         method: 'POST',
+        
         headers: {
           'Content-Type': 'application/json',
         },

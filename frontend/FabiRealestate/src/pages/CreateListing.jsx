@@ -135,6 +135,7 @@ export default function CreateListing() {
       setError(false);
       const res = await fetch('https://u09-fullstack-js-simretn.onrender.com/api/listing/create', {
         method: 'POST',
+        credentials: "include",
         headers: {
           'Content-Type': 'application/json',
         },
