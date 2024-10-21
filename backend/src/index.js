@@ -24,7 +24,23 @@ app.use(express.json());
 const whitelist = [
   "https://fabiestate.netlify.app",
   "http://localhost:5173"
-]
+];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
+      callback(null, true); // Allow requests with no origin (like mobile apps or Postman)
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true, // Allows credentials like cookies or authorization headers
+};
+
+// Use CORS middleware
+app.use(cors(corsOptions));
+
    /*app.use(cors({
   /*origin: function(origin,callback) {
     if (whitelist.indexOf(origin)!==-1||!origin){
@@ -36,15 +52,7 @@ const whitelist = [
 //     origin: "http://localhost:5173",
 //      credentials: true
 //  }))
- const corsOptions = {
-  origin: "*", 
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true,
-};
-
-// Use CORS middleware
-app.use(cors(corsOptions));
-
+ 
 
 
 
