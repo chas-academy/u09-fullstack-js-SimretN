@@ -33,15 +33,8 @@ const whitelist = [
       callback(new Error("not allowed by cors"))
     }
   },*/
-  //  origin: "http://localhost:5173",
-  origin: function (origin, callback) {
-    if (whitelist.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-    credentials: true
+    origin: "http://localhost:5173",
+     credentials: true
  }))
 
 
@@ -61,7 +54,7 @@ app.use('/api/listing', listingRouter);
 //   res.sendFile(path.join(__dirname, 'frontend/FabiRealestate', 'dist', 'index.html'));
 // })
 
-/*app.use((err, req, res, next) => { //middleware
+app.use((err, req, res, next) => { //middleware
   const statusCode = err.statusCode || 500;
   const message = err.message || 'Internal Server Error';
   return res.status(statusCode).json({
@@ -69,12 +62,8 @@ app.use('/api/listing', listingRouter);
     statusCode,
     message,
   });
-});*/
-app.use((err, req, res, next) => {
-  const status = err.status || 500;
-  const message = err.message || 'Internal Server Error';
-  res.status(status).json({ status, message });
 });
+
 
 
 const port = process.env.PORT || 3000; // This should be the only declaration of 'port'

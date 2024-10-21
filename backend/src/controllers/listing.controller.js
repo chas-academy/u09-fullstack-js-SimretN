@@ -3,28 +3,15 @@ import { errorHandler } from '../../utils/error.js';
 
 
 
-/*export const createListing = async (req, res, next) => {
+export const createListing = async (req, res, next) => {
     try {
       const listing = await Listing.create(req.body);
       return res.status(201).json(listing);
     } catch (error) {
       next(error);
     }
-  };*/
-  export const createListing = async (req, res, next) => {
-    const { title, price, description, userRef } = req.body; // Example fields
-  
-    if (!title || !price || !description || !userRef) {
-      return next(errorHandler(400, 'All fields are required!'));
-    }
-  
-    try {
-      const listing = await Listing.create(req.body);
-      res.status(201).json(listing);
-    } catch (error) {
-      next(error);
-    }
   };
+  
   
   export const deleteListing = async (req, res, next) => {
     const listing = await Listing.findById(req.params.id);
