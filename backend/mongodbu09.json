@@ -1,0 +1,109 @@
+[{
+  "_id": {
+    "$oid": "66d708914fcb71f32cfe1c73"
+  },
+  "username": "test2",
+  "email": "test2@gmail.com",
+  "password": "$2a$10$MidMR8H67TzaBM09sJdyP.yoy/jRprfKDyUcQm2bnRypEgCLXWKgi",
+  "createdAt": {
+    "$date": "2024-09-03T13:01:05.821Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-10T09:52:55.396Z"
+  },
+  "__v": 0,
+  "avatar": "https://firebasestorage.googleapis.com/v0/b/fabiestate-2de79.appspot.com/o/1728553951026simret2.jpg?alt=media&token=7f90fa38-ee4e-4244-8517-8b4abe388087"
+},
+{
+  "_id": {
+    "$oid": "66dc3e19063adb101da8a339"
+  },
+  "username": "test3",
+  "email": "test3@gmail.com",
+  "password": "$2a$10$AIIPf0Z9J3vVDWdK31cyXOww7AQPa3WtfkhMZqTxV5BnnjbA1x6xK",
+  "createdAt": {
+    "$date": "2024-09-07T11:50:49.385Z"
+  },
+  "updatedAt": {
+    "$date": "2024-09-07T11:50:49.385Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66df5f6f415780916936a467"
+  },
+  "username": "test4",
+  "email": "test4@gmail.com",
+  "password": "$2a$10$WtsnXunBtALLn18jx/PR6ekTefhK0CAmU52.Z1nRzq8mI9LJwRmHS",
+  "createdAt": {
+    "$date": "2024-09-09T20:49:51.990Z"
+  },
+  "updatedAt": {
+    "$date": "2024-09-09T20:49:51.990Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66df6224415780916936a46c"
+  },
+  "username": "test5",
+  "email": "test5@gmail.com",
+  "password": "$2a$10$ea/YHyyfYkDZDC3SLQWpi.EXh0Wc2Z0vtpXq5u8cWrfwzGqcY55ti",
+  "createdAt": {
+    "$date": "2024-09-09T21:01:24.203Z"
+  },
+  "updatedAt": {
+    "$date": "2024-09-09T21:01:24.203Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66ea7f13cb8b9e1af08bc244"
+  },
+  "username": "simretnegashd1sk",
+  "email": "simnnf4@gmail.com",
+  "password": "$2a$10$NQ8al3qxvXLadvyVeIHyJOVy7TcTJ86MIXn7MMWE/iY6gGyEwtzlm",
+  "avatar": "https://lh3.googleusercontent.com/a/ACg8ocJmPDZf11Kj8UVu6NtM6OTRWaSyEFj05ynAiJJzRfgsdb1ifZg=s96-c",
+  "createdAt": {
+    "$date": "2024-09-18T07:19:47.645Z"
+  },
+  "updatedAt": {
+    "$date": "2024-09-30T09:07:53.714Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66f2d06b358e164b8f81f685"
+  },
+  "username": "test7",
+  "email": "test7@gmail.com",
+  "password": "$2a$10$5A7sQ230S.LX6J5ER1bcLuT/WsGkOH7vrzCaBoj//9AYV4hpV3OEe",
+  "avatar": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=pexels-pixabay-220453.jpg&fm=jpg",
+  "createdAt": {
+    "$date": "2024-09-24T14:44:59.917Z"
+  },
+  "updatedAt": {
+    "$date": "2024-09-24T14:44:59.917Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66f2d52f358e164b8f81f68e"
+  },
+  "username": "test8",
+  "email": "test8@gmail.com",
+  "password": "$2a$10$q8JjZpmWYBeRPZZ9YJGPqOIbgzyXKpiiDFzg7dU01TXu8cRj0YoIO",
+  "avatar": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=pexels-pixabay-220453.jpg&fm=jpg",
+  "createdAt": {
+    "$date": "2024-09-24T15:05:19.547Z"
+  },
+  "updatedAt": {
+    "$date": "2024-09-24T15:05:19.547Z"
+  },
+  "__v": 0
+}]
