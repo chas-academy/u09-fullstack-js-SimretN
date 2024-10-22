@@ -47,7 +47,7 @@ export const test = (req, res) => {
       next(error);
     }
   };
-  export const getUserListings = async (req, res, next) => {
+  /*export const getUserListings = async (req, res, next) => {
     if (req.user.id === req.params.id) {
       try {
         const listings = await Listing.find({ userRef: req.params.id });
@@ -58,7 +58,25 @@ export const test = (req, res) => {
     } else {
       return next(errorHandler(401, 'You can only view your own listings!'));
     }
-  };
+  };*/
+  // user.controller.js
+export const getUserListings = async (req, res, next) => {
+  // Check if req.user is populated (after verifyToken middleware)
+  if (!req.user || !req.user.id) {
+    return next(errorHandler(401, 'Not authenticated!'));  // Return error if not authenticated
+  }
+  if (req.user.id !== req.params.id) {
+    return next(errorHandler(401, 'You can only view your own listings!'));  // Ensure only the correct user can access listings
+  }
+
+  try {
+    const listings = await Listing.find({ userRef: req.params.id });
+    res.status(200).json(listings);
+  } catch (error) {
+    next(error);  // Catch any errors and pass to error handler
+  }
+};
+
 
   export const getUser = async (req, res, next) => {
     try {
