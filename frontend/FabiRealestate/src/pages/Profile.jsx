@@ -143,6 +143,7 @@ export default function Profile() {
     try {
       const res = await fetch(`https://u09-fullstack-js-simretn.onrender.com/api/listing/delete/${listingId}`, {
         method: 'DELETE',
+        credentials: "include",
       });
       const data = await res.json();
       if (data.success === false) {
