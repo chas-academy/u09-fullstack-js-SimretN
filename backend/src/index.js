@@ -80,59 +80,73 @@ import cors from 'cors';
 
 dotenv.config();
 
-// MongoDB connection
+// Connect to MongoDB
 mongoose.connect(process.env.MONGO)
-  .then(() => console.log('connected to MongoDB!'))
-  .catch((err) => console.log(err));
+  .then(() => {
+    console.log('Connected to MongoDB!');
+  })
+  .catch((err) => {
+    console.error('MongoDB connection error:', err);
+  });
 
 const app = express();
 
-// CORS Configuration
+// Middleware to parse JSON and URL-encoded data
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Cookie Parser middleware
+app.use(cookieParser());
+
+// Whitelisted domains for CORS
 const whitelist = [
-  "https://fabiestate.netlify.app", // Your frontend hosted on Netlify
-  "http://localhost:5173" // Local development
+  'https://fabiestate.netlify.app',
+  'http://localhost:5173'
 ];
 
+// CORS options
 const corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1 || !origin) {
-      callback(null, true); // Allow requests with no origin (like mobile apps or Postman)
+      callback(null, true); // Allow requests from whitelisted domains or without origin (like Postman)
     } else {
-      callback(new Error("Not allowed by CORS"));
+      callback(new Error('Not allowed by CORS'));
     }
   },
-  methods: ["GET", "POST", "PUT", "DELETE"], // Allow these methods
-  credentials: true, // Allow credentials like cookies or authorization headers
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true, // Allows cookies, authorization headers, etc.
 };
 
-// Use CORS Middleware before any route is defined
+// Use CORS middleware
 app.use(cors(corsOptions));
 
-// Middlewares
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
+// Manual CORS headers middleware (for custom control)
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'https://fabiestate.netlify.app'); // Allow specific origin
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.header('Access-Control-Allow-Credentials', 'true'); // Enable credentials (cookies, etc.)
+  next();
+});
 
-// API Routes
+// Routes
 app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/listing', listingRouter);
 
-// Error Handling Middleware
+// Error handling middleware
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
   const message = err.message || 'Internal Server Error';
-  res.status(statusCode).json({
+  return res.status(statusCode).json({
     success: false,
     statusCode,
     message,
   });
 });
 
-// Server Listening
+// Start server
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
 });
-
-
