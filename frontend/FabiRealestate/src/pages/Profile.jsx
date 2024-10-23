@@ -127,7 +127,7 @@ export default function Profile() {
     try {
       setShowListingsError(false);
       
-      const res = await fetch(`https://u09-fullstack-js-simretn.onrender.com/api/user/listings/${currentUser._id}`);
+      const res = await fetch(`https://u09-fullstack-js-simretn.onrender.com/api/user/listings/${currentUser._id}`,{credentials: "include"});
       const data = await res.json();
       if (data.success === false) {
         setShowListingsError(true);

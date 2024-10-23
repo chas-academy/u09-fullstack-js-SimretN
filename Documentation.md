@@ -246,3 +246,9 @@ OPPS!
 **Delete Listings:** Users can remove their own listings from the platform whenever they are no longer available or if they choose to withdraw them.
 
 This application does not include an administrative role with the power to delete, edit, update, or create listings on behalf of other users. Each user is limited to managing only their own listings, ensuring privacy and individual control over personal property information.
+
+
+
+
+
+- https://www.figma.com/design/aMbaI9kZaf4dzh0gvNrAcF/U9-Real-estate-figma?node-id=0-1&t=7e9CFv9zduR3biKE-1
