@@ -41,6 +41,11 @@ export default function Profile() {
   
   }, [file]);
   const handleFileUpload = (file) => {
+    // Check if file size is greater than 2MB
+    if (file.size > 2 * 1024 * 1024) {
+      setFileUploadError(true);
+      return;
+    }
   const storage =getStorage(app);
   const fileName = new Date().getTime() + file.name;
   const storageRef = ref(storage, fileName);
@@ -287,4 +292,3 @@ export default function Profile() {
        </div>
   );
 }
-
