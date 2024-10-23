@@ -148,7 +148,7 @@ export default function CreateListing() {
         return setError('Discount price must be lower than regular price');
       setLoading(true);
       setError(false);
-      const res = await fetch(`https://u09-fullstack-js-simretn.onrender.com/api/listing/update/${params.listingId}`, {
+      const res = await fetch(`https://u09-fullstack-js-simretn.onrender.com/api/listing/update/${params.listingId}`,{credentials: "include"}, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
