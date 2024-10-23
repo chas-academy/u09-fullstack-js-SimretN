@@ -252,3 +252,6 @@ This application does not include an administrative role with the power to delet
 
 
 - https://www.figma.com/design/aMbaI9kZaf4dzh0gvNrAcF/U9-Real-estate-figma?node-id=0-1&t=7e9CFv9zduR3biKE-1
+
+
+- https://www.figma.com/design/csppQ4PKRmZJ1zXfp6Qslu/Untitled?node-id=1-50&t=TqKXyylKCIC8Bp7P-1
