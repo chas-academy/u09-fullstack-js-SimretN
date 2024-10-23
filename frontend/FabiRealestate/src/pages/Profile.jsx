@@ -111,7 +111,7 @@ export default function Profile() {
   const handleSignOut = async () => {
     try {
       dispatch(signOutUserStart());
-      const res = await fetch('https://u09-fullstack-js-simretn.onrender.com/api/auth/signout',{credentials: "include"});
+      const res = await fetch('https://u09-fullstack-js-simretn.onrender.com/api/auth/signout'/*,{credentials: "include"}*/);
       const data = await res.json();
       if (data.success === false) {
         dispatch(deleteUserFailure(data.message));

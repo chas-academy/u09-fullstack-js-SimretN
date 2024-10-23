@@ -32,7 +32,7 @@ export default function Listing() {
     const fetchListing = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`https://u09-fullstack-js-simretn.onrender.com/api/listing/get/${params.listingId}`,{credentials: "include"});
+        const res = await fetch(`https://u09-fullstack-js-simretn.onrender.com/api/listing/get/${params.listingId}`/*,{credentials: "include"}*/);
         const data = await res.json();
         if (data.success === false) {
           setError(true);

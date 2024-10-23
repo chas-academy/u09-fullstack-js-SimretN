@@ -36,7 +36,7 @@ export default function CreateListing() {
   useEffect(() => {
     const fetchListing = async () => {
       const listingId = params.listingId;
-      const res = await fetch(`https://u09-fullstack-js-simretn.onrender.com/api/listing/get/${listingId}`,{credentials: "include"});
+      const res = await fetch(`https://u09-fullstack-js-simretn.onrender.com/api/listing/get/${listingId}`/*,{credentials: "include"}*/);
       const data = await res.json();
       if (data.success === false) {
         console.log(data.message);
