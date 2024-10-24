@@ -106,13 +106,14 @@ const whitelist = [
 
 // CORS options
 const corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1 || !origin) {
-      callback(null, true); // Allow requests from whitelisted domains or without origin (like Postman)
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: whitelist,
+  // origin: function (origin, callback) {
+  //   if (whitelist.indexOf(origin) !== -1 || !origin) {
+  //     callback(null, true); // Allow requests from whitelisted domains or without origin (like Postman)
+  //   } else {
+  //     callback(new Error('Not allowed by CORS'));
+  //   }
+  // },
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true, // Allows cookies, authorization headers, etc.
 };
