@@ -154,7 +154,7 @@ export default function Profile() {
 
       const res = await fetch(
         `https://u09-fullstack-js-simretn.onrender.com/api/user/listings/${currentUser._id}`,
-        { credentials: "include", method: "GET"}
+        { credentials: "include", method: "POST"}
       );
       const data = await res.json();
       if (data.success === false) {
