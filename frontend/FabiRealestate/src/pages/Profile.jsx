@@ -78,15 +78,25 @@ export default function Profile() {
       dispatch(updateUserStart());
       const res = await fetch(
         `https://u09-fullstack-js-simretn.onrender.com/api/user/update/${currentUser._id}`,
-        { credentials: "include" },
+        /*{ credentials: "include", method: "POST"},
         {
-          method: "POST",
+          
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(formData),
         }
-      );
+      );*/
+
+      {
+        credentials: "include",
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+    }
+);
 
       const data = await res.json();
       if (data.success === false) {
