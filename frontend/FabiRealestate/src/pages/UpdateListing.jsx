@@ -149,7 +149,7 @@ export default function CreateListing() {
       setLoading(true);
       setError(false);
       const res = await fetch(`https://u09-fullstack-js-simretn.onrender.com/api/listing/update/${params.listingId}`,{credentials: "include"}, {
-        method: 'PUT',
+        method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },

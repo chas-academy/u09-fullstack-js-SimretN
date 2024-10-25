@@ -7,7 +7,7 @@ const router = express.Router();
 // Apply verifyToken middleware to routes that need protection
 router.post('/create', verifyToken, createListing); // Protected
 router.delete('/delete/:id', verifyToken, deleteListing); // Protected
-router.put('/update/:id', verifyToken, updateListing); // Protected
+router.get('/update/:id', verifyToken, updateListing); // Protected
 router.get('/get/:id', getListing); // Public (if you want to allow anyone to get a specific listing)
 router.get('/get', getListings); // Public (if you want to allow anyone to get all listings)
 
