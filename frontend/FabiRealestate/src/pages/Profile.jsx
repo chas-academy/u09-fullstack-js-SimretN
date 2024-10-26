@@ -98,6 +98,7 @@ export default function Profile() {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${currentUser.token}`,
         },
         body: JSON.stringify(formData),
     }
@@ -157,7 +158,7 @@ export default function Profile() {
     try {
       setShowListingsError(false);
 
-      const res = await fetch(
+      /*const res = await fetch(
         `https://u09-fullstack-js-simretn.onrender.com/api/user/listings/${currentUser._id}`,
         { credentials: "include", method: "GET",});
       
@@ -165,7 +166,18 @@ export default function Profile() {
       if (data.success === false) {
         setShowListingsError(true);
         return;
-      }
+      }*/
+        const res = await fetch(
+          `https://u09-fullstack-js-simretn.onrender.com/api/user/listings/${currentUser._id}`,
+          {
+            credentials: "include",
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${currentUser.token}`,
+            },
+          }
+        );
+        
 
       setUserListings(data);
     } catch (error) {
