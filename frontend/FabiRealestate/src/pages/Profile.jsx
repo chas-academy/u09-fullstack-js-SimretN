@@ -37,7 +37,7 @@ export default function Profile() {
       request.resource.contentType.matches("image/.*")*/
   useEffect(() => {
     if (file) {
-      console.log("File selected:", file); 
+      
       handleFileUpload(file);
     }
   }, [file]);
@@ -45,7 +45,7 @@ export default function Profile() {
 
     // Check if file size is greater than 2MB
     if (file.size > 2 * 1024 * 1024) {
-      console.log("File size error:", file.size); 
+      
       setFileUploadError(true);
       return;
     }
@@ -59,7 +59,7 @@ export default function Profile() {
       (snapshot) => {
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log(`Upload progress: ${Math.round(progress)}%`); 
+           
         setFilePerc(Math.round(progress));
       },
       (error) => {
@@ -98,7 +98,7 @@ export default function Profile() {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${currentUser.token}`,
+            
         },
         body: JSON.stringify(formData),
     }
