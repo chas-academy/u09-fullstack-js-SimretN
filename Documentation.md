@@ -230,7 +230,7 @@ To help you explore the features of FabiRealestate, you can log in using the fol
 Email: test2@gmail.com
 Password: Vinter0824
 
-Email: sebbel@gmail.com
+Email: sebbe@gmail.com
 Password: Vinter0824
 
 OPPS!
