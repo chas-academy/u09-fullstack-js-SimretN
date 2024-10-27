@@ -158,7 +158,7 @@ export default function Profile() {
     try {
       setShowListingsError(false);
 
-      /*const res = await fetch(
+      const res = await fetch(
         `https://u09-fullstack-js-simretn.onrender.com/api/user/listings/${currentUser._id}`,
         { credentials: "include", method: "GET",});
       
@@ -166,8 +166,8 @@ export default function Profile() {
       if (data.success === false) {
         setShowListingsError(true);
         return;
-      }*/
-        const res = await fetch(
+      }
+        /*const res = await fetch(
           `https://u09-fullstack-js-simretn.onrender.com/api/user/listings/${currentUser._id}`,
           {
             credentials: "include",
@@ -176,7 +176,7 @@ export default function Profile() {
                 Authorization: `Bearer ${currentUser.token}`,
             },
           }
-        );
+        );*/
         
 
       setUserListings(data);
@@ -294,7 +294,7 @@ export default function Profile() {
         Show Listings
       </button>
       <p className="text-red-700 mt-5">
-        {showListingsError ? "Error showing listings" : ""}
+        {showListingsError ? "Error showing listings for user " : ""}
       </p>
       {userListings && userListings.length > 0 && (
         <div className="flex flex-col gap-4">
