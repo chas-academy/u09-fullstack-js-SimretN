@@ -230,6 +230,9 @@ To help you explore the features of FabiRealestate, you can log in using the fol
 Email: test2@gmail.com
 Password: Vinter0824
 
+Email: sebbel@gmail.com
+Password: Vinter0824
+
 OPPS!
 
  <!-- I have the CRUD features in my application that are basically users can delete, edit, update and create listings,but I don't have admin that can delete, edit, update and create. -->
@@ -249,9 +252,19 @@ This application does not include an administrative role with the power to delet
 
 
 
+## Low-Fidelity Prototyping ##
 
 
 - https://www.figma.com/design/aMbaI9kZaf4dzh0gvNrAcF/U9-Real-estate-figma?node-id=0-1&t=7e9CFv9zduR3biKE-1
 
 
+## persons and user stories ##
+
+
 - https://www.figma.com/design/csppQ4PKRmZJ1zXfp6Qslu/Untitled?node-id=1-50&t=TqKXyylKCIC8Bp7P-1
+
+  
+  ## Fire Base ##
+
+
+- https://console.firebase.google.com/u/0/project/fabiestate-2de79/storage/fabiestate-2de79.appspot.com/files
