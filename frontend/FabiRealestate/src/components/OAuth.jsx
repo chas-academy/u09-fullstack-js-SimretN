@@ -14,17 +14,6 @@ export default function OAuth() {
 
       const result = await signInWithPopup(auth,provider);
 
-      /*const res = await fetch('https://u09-fullstack-js-simretn.onrender.com/api/auth/google',{credentials: "include"}, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: result.user.displayName,
-          email: result.user.email,
-          photo: result.user.photoURL,
-        }),
-      });*/
       const res = await fetch('https://u09-fullstack-js-simretn.onrender.com/api/auth/google', {
         credentials: "include",
         method: "POST",
