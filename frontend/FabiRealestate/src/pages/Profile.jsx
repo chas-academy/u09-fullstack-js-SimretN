@@ -341,8 +341,6 @@ export default function Profile() {
   const [fileUploadError, setFileUploadError] = useState(false);
   const [formData, setFormData] = useState({});
   const [updateSuccess, setUpdateSuccess] = useState(false);
-  const [showListingsError, setShowListingsError] = useState(false);
-  const [userListings, setUserListings] = useState([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -424,8 +422,8 @@ export default function Profile() {
   };
 
   return (
-    <div className="p-4 max-w-lg mx-auto rounded-lg shadow-lg bg-white">
-      <h1 className="text-4xl font-semibold text-center mb-5 text-gray-700">Your Profile</h1>
+    <div className="p-6 max-w-lg mx-auto rounded-lg shadow-lg bg-white">
+      <h1 className="text-4xl font-semibold text-center mb-6 text-gray-700">Your Profile</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
           type="file"
@@ -479,7 +477,7 @@ export default function Profile() {
         <button onClick={() => dispatch(signOutUserStart())} className="text-gray-600">Sign Out</button>
       </div>
       {updateSuccess && <p className="mt-4 text-center text-green-500">Profile updated successfully!</p>}
+      {error && <p className="mt-4 text-center text-red-500">{error}</p>}
     </div>
   );
 }
-
