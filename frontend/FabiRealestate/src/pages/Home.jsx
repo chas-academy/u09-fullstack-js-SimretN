@@ -183,23 +183,23 @@ export default function Home() {
   return (
     <div className="bg-gray-50">
       {/* Hero Section */}
-      <div className="flex flex-col items-center gap-6 py-28 px-3 max-w-6xl mx-auto text-center bg-gradient-to-r from-blue-500 to-teal-500 text-white rounded-lg shadow-lg">
-        <h1 className="font-extrabold text-4xl lg:text-6xl tracking-tight">
-          Hitta ditt <span className="text-yellow-300">perfekta</span> hem enkelt
+      <div className="flex flex-col items-center gap-6 py-20 px-4 max-w-7xl mx-auto text-center bg-gradient-to-r from-blue-600 to-teal-600 text-white rounded-lg shadow-lg">
+        <h1 className="font-extrabold text-4xl lg:text-5xl tracking-tight">
+          Find Your Perfect <span className="text-yellow-300">Home</span> Today
         </h1>
-        <p className="text-gray-200 text-sm sm:text-base max-w-lg">
-          Fabi Estate är den bästa platsen för att hitta ditt nästa hem. Vi erbjuder ett brett urval av bostäder för alla behov.
+        <p className="text-gray-200 text-sm sm:text-lg max-w-xl">
+          Discover a wide selection of properties to suit all your needs. Explore listings for rent, sale, and exclusive offers.
         </p>
         <Link
           to={'/search'}
-          className="mt-4 bg-yellow-300 text-blue-900 font-bold py-2 px-4 rounded-full hover:bg-yellow-400 transition"
+          className="mt-4 bg-yellow-300 text-blue-900 font-semibold py-2 px-6 rounded-full hover:bg-yellow-400 transition-all"
         >
-          Börja nu!
+          Start Searching
         </Link>
       </div>
 
       {/* Swiper Section */}
-      <div className="my-8">
+      <div className="my-10 max-w-7xl mx-auto px-4">
         <Swiper navigation loop={true} className="rounded-lg shadow-lg">
           {offerListings &&
             offerListings.map((listing) => (
@@ -208,10 +208,10 @@ export default function Home() {
                   style={{
                     backgroundImage: `url(${listing.imageUrls[0]})`,
                   }}
-                  className="h-[500px] bg-center bg-cover relative flex items-center justify-center"
+                  className="h-[400px] bg-center bg-cover relative flex items-center justify-center rounded-lg overflow-hidden"
                 >
-                  <div className="absolute inset-0 bg-black opacity-40"></div>
-                  <h2 className="text-white text-3xl font-semibold z-10">Erbjudanden</h2>
+                  <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+                  <h2 className="text-white text-3xl font-semibold z-10">Exclusive Offers</h2>
                 </div>
               </SwiperSlide>
             ))}
@@ -219,16 +219,16 @@ export default function Home() {
       </div>
 
       {/* Listings Sections */}
-      <div className="max-w-6xl mx-auto p-3 flex flex-col gap-12">
-        {[{ title: 'Erbjudanden', listings: offerListings, type: 'offer' },
-          { title: 'Hyresbostäder', listings: rentListings, type: 'rent' },
-          { title: 'Till Salu', listings: saleListings, type: 'sale' }]
+      <div className="max-w-7xl mx-auto px-4 flex flex-col gap-12">
+        {[{ title: 'Exclusive Offers', listings: offerListings, type: 'offer' },
+          { title: 'Homes for Rent', listings: rentListings, type: 'rent' },
+          { title: 'Homes for Sale', listings: saleListings, type: 'sale' }]
           .map((section) => (
-            <div key={section.type} className="bg-white p-6 rounded-lg shadow-md">
+            <div key={section.type} className="bg-white p-6 rounded-lg shadow-md transition-transform transform hover:-translate-y-1">
               <div className="flex justify-between items-center mb-4">
-                <h2 className="text-2xl font-bold text-slate-700">{section.title}</h2>
+                <h2 className="text-2xl font-bold text-gray-700">{section.title}</h2>
                 <Link to={`/search?type=${section.type}`} className="text-blue-600 hover:underline text-sm">
-                  Se fler {section.title.toLowerCase()}
+                  View More {section.title}
                 </Link>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
