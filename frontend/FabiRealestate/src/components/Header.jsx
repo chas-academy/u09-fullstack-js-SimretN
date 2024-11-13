@@ -130,10 +130,10 @@ export default function Header() {
         {/* Navigation Links */}
         <ul className="flex space-x-6">
           <Link to="/">
-            <li className="hidden sm:inline text-gray-200 hover:text-white transition duration-200">Home</li>
+            <li className="text-gray-200 hover:text-white transition duration-200">Home</li>
           </Link>
           <Link to="/about">
-            <li className="hidden sm:inline text-gray-200 hover:text-white transition duration-200">About</li>
+            <li className="text-gray-200 hover:text-white transition duration-200">About</li>
           </Link>
 
           <Link to="/profile" className="flex items-center space-x-2">
@@ -152,4 +152,3 @@ export default function Header() {
     </header>
   );
 }
-
